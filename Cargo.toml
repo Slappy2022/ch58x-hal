@@ -1,0 +1,14 @@
+[package]
+name = "ch58x-hal"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ch58x = { path = "../ch32-rs-nightlies/ch58x", default-features = false, features = [ "ch58x" ] }
+embedded-hal = "0.2.7"
+nb = "1.0.0"
+riscv = "0.10.1"
+
+[dev-dependencies]
+panic-halt = "0.2.0"
+riscv-rt = "0.11.0"
