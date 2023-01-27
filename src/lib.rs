@@ -3,6 +3,8 @@
 mod gpio;
 pub use gpio::*;
 
+pub mod println;
+
 mod uart;
 pub use uart::*;
 
