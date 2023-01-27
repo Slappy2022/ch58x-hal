@@ -5,6 +5,11 @@ pub use gpio::*;
 
 pub mod println;
 
+pub mod logger;
+
+mod rtc;
+pub use rtc::*;
+
 mod uart;
 pub use uart::*;
 

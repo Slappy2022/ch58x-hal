@@ -7,6 +7,7 @@ edition = "2021"
 #ch58x = { path = "../ch32-rs-nightlies/ch58x", default-features = false, features = ["ch58x"] }
 ch58x = { git = "https://github.com/Slappy2022/ch32-rs-nightlies.git", default-features = false, features = ["ch58x"] }
 embedded-hal = "0.2.7"
+log = "0.4.17"
 nb = "1.0.0"
 riscv = "0.10.1"
 
