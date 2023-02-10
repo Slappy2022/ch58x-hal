@@ -3,17 +3,16 @@
 mod gpio;
 pub use gpio::*;
 
-pub mod println;
-
-pub mod logger;
-
 mod rtc;
 pub use rtc::*;
 
 mod uart;
 pub use uart::*;
 
+pub mod logger;
+pub mod println;
 pub mod registers;
+pub mod safe;
 pub mod sys;
 
 pub fn delay_ms(timeout_ms: u32) {
