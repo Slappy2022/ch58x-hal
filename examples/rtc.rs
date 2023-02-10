@@ -18,9 +18,11 @@ fn main() -> ! {
         hal::Serial::new(uart, tx, rx)
     };
     hal::println::init(serial);
+    hal::logger::init(log::LevelFilter::Trace);
     let mut led = hal::OutputPin::new('B', 4);
     led.set_high().unwrap();
 
+    hal::clock::calibrate(hal::clock::CalibrationLevel::Level2048);
     loop {
         let timeout = hal::now_us() + 1_000_000;
         let now = loop {
@@ -29,6 +31,6 @@ fn main() -> ! {
                 break now;
             }
         };
-        hal::println!("timeout diff us: {}", now - timeout);
+        log::info!("timeout diff us: {}", now - timeout);
     }
 }

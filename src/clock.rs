@@ -80,8 +80,7 @@ pub enum CalibrationLevel {
 }
 
 static CAB_LSIFQ: i32 = 32_000;
-pub fn calibrate() {
-    let calibration_level = CalibrationLevel::Level64;
+pub fn calibrate(calibration_level: CalibrationLevel) {
     use crate::registers::*;
     use crate::safe::*;
     ck32k_config::clk_osc32k_filt::write(true);
