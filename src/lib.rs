@@ -14,6 +14,7 @@ mod uart;
 pub use uart::*;
 
 pub mod registers;
+pub mod sys;
 
 pub fn delay_ms(timeout_ms: u32) {
     // No idea why 15_000 is used here instead of 1_000
