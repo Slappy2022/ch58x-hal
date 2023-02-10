@@ -13,6 +13,7 @@ pub mod logger;
 pub mod println;
 pub mod registers;
 pub mod safe;
+pub mod clock;
 pub mod sys;
 
 pub fn delay_ms(timeout_ms: u32) {
