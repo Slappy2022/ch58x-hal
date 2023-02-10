@@ -18,6 +18,7 @@ pub enum ClockSource {
     Pll20MHz = 0x40 | 24,
     Pll15MHz = 0x40 | 0,
 }
+
 impl ClockSource {
     pub fn is_hse(self) -> bool {
         self as u8 & 0x20 != 0
@@ -53,7 +54,6 @@ pub fn set_sys_clock(source: ClockSource) {
     pll_config::flash_io_mod::write(true);
 }
 
-#[no_mangle]
 pub fn get_sys_clock() -> u32 {
     let (clock, div) = crate::safe::clk_sys_cfg::read();
     let div = div as u32;
@@ -78,6 +78,7 @@ pub enum CalibrationLevel {
     Level1024 = 0b0000_0110,
     Level2048 = 0b0000_0111,
 }
+
 static CAB_LSIFQ: i32 = 32_000;
 pub fn calibrate() {
     let calibration_level = CalibrationLevel::Level64;
