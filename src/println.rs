@@ -1,9 +1,9 @@
-use crate::{OutputPin, Serial};
+use crate::{Output, PinA, Serial, _5mA};
 use ch58x::ch58x as pac;
 
-static mut SERIAL: Option<Serial<pac::UART3, OutputPin, OutputPin>> = None;
+static mut SERIAL: Option<Serial<pac::UART3, PinA<5, Output<_5mA>>, PinA<4, Output<_5mA>>>> = None;
 
-pub fn init(serial: Serial<pac::UART3, OutputPin, OutputPin>) {
+pub fn init(serial: Serial<pac::UART3, PinA<5, Output<_5mA>>, PinA<4, Output<_5mA>>>) {
     unsafe { SERIAL = Some(serial) };
 }
 
