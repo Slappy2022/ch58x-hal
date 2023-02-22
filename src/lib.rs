@@ -9,6 +9,7 @@ pub use rtc::*;
 mod uart;
 pub use uart::*;
 
+pub mod adc;
 pub mod clock;
 pub mod delay;
 pub mod i2c;
