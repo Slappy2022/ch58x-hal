@@ -22,7 +22,7 @@ fn main() -> ! {
     let mut led = hal::PinB::<4>::new().into_output_5ma();
 
     loop {
-        log::info!("{:.2}°C", hal::adc::temperature_celsius());
+        log::info!("{:.2}°C\t {}mV", hal::adc::temperature_celsius(), hal::adc::battery_mv());
         led.toggle();
         hal::delay_ms(1000);
     }

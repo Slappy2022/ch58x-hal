@@ -35,7 +35,7 @@ pub fn temperature_celsius() -> f32 {
             .adc_convert
             .write(|w| w.adc_start().bit(true));
         while (*pac::SYS::ptr()).adc_convert.read().adc_start().bit() {}
-        let _ = (*pac::SYS::ptr()).adc_data.read().bits() as i32;
+        let _ = (*pac::SYS::ptr()).adc_data.read().bits();
 
         let mut sum = 0;
         for _i in 0..16 {
@@ -45,5 +45,36 @@ pub fn temperature_celsius() -> f32 {
         let (ref_temp, ref_raw) = rom_config_temperature_25c();
         let result = ref_temp * 100 + ((raw_temp - ref_raw) * 1000) / 27;
         (result as f32) / 100.0
+    }
+}
+
+pub fn battery_mv() -> u32 {
+    unsafe {
+        (*pac::SYS::ptr())
+            .tkey_cfg
+            .write(|w| w.tkey_pwr_on().bit(false));
+        (*pac::SYS::ptr())
+            .adc_channel
+            .write(|w| w.adc_ch_inx().bits(0x0e));
+        (*pac::SYS::ptr()).adc_cfg.write(|w| {
+            w.adc_clk_div().bits(0b00);
+            w.adc_pga_gain().bits(0b00);
+            w.adc_ofs_test().bit(false);
+            w.adc_diff_en().bit(false);
+            w.adc_buf_en().bit(true);
+            w.adc_power_on().bit(true);
+            w
+        });
+        (*pac::SYS::ptr())
+            .adc_convert
+            .write(|w| w.adc_start().bit(true));
+        while (*pac::SYS::ptr()).adc_convert.read().adc_start().bit() {}
+        let _ = (*pac::SYS::ptr()).adc_data.read().bits();
+
+        let mut sum = 0;
+        for _i in 0..16 {
+            sum += (*pac::SYS::ptr()).adc_data.read().bits() as u32;
+        }
+        sum / 16
     }
 }
